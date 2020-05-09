@@ -486,7 +486,7 @@ case "$os" in
 	sys="alpine"
 	update="apk update"
 	fl="/etc/apk/repositories"
-	alpine1
+	alpines
 	;;
 	10)
 	menu
