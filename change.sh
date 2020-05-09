@@ -640,6 +640,7 @@ echo -e "${centos1}"
 }
 #alpine使用
 alpines(){
+mc ${fl}.bak ${fl}
 cp ${fl} ${fl}.bak
 sed -i 's/dl-cdn.alpinelinux.org/'"${yt}"'/g' ${fl}
 ${update}
