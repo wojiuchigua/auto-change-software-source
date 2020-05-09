@@ -378,7 +378,6 @@ online
 2)
 offline
 ;;
-;;
 3)
 exit 1
 ;;
@@ -395,7 +394,7 @@ online(){
 clear
 echo -e "${tongyong}"
 ${gen} onl
-case "onl" in
+case "$onl" in
 1)
 yuan="ali"
 oso="-f"
@@ -456,7 +455,6 @@ oncentos(){
 if [ "${ID}" = "centos" ];then
 update="sudo yum makecache && yum update"
 oncentos7
-fi
 else
 ondebian
 fi
@@ -477,7 +475,6 @@ sys=${ID}
 ver="${VERSION_ID}.repo"
 bc=".bakup"
 fl="/etc/yum.repos.d/CentOS-Base.repo"
-else
 else
 oncentos8
 fi
@@ -522,6 +519,7 @@ fi
 }
 
 onkali(){
+yt="${yt}"
 if [ "${ID}" = "kali" ];then
 sys="${ID}"
 ver="1.list"
@@ -606,3 +604,4 @@ echo -e "更换完成"
 sleep 3s
 fi
 }
+allselect
