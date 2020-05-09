@@ -536,17 +536,12 @@ fi
 }
 #r基本任务处理,本不想使用这么蠢的结构不过我好懒啊
 run(){
-echo -e "${fl}${dl}${yuan}${sys}${ver}${bc}"
-echo -e "${yuan}${sys}${ver}"
 echo -e "使用wget下载"
-rm -rf ${yuan}${sys}${ver}
-wget --no-check-certificate http://${dl}/${yuan}${sys}${ver}
-if [ -f "${yuan}${sys}${ver}" ];then
-echo -e "下载完成"
-cp ${fl} ${fl}${bc}
+mv ${fl} ${fl}${bc}
 echo -e "已备份"
-rm -rf ${fl}
-mv ${yuan}${sys}${ver} ${fl}
+wget -O ${fl} http://${dl}/${yuan}${sys}${ver}
+if [ -f "${fl}" ];then
+echo -e "下载完成"
 ${update}
 clear
 echo -e "更换完成"
@@ -565,7 +560,7 @@ echo -e "下载失败请检查网络链接"
 rm -rf ${yuan}${sys}${ver}
 else
 echo -e "下载完成"
-cp ${fl} ${fl}${bc}
+mv ${fl} ${fl}${bc}
 echo -e "已备份"
 rm -rf ${fl}
 mv ${yuan}${sys}${ver} ${fl}
@@ -577,17 +572,12 @@ fi
 }
 #我懒了直接复制修改吧
 run2(){
-echo -e "${fl2}${dl}${yuan}${sys}${ver2}${bc}"
-echo -e "${yuan}${sys}${ver2}"
 echo -e "使用wget下载"
-rm -rf ${yuan}${sys}${ver2}
-wget --no-check-certificate http://${dl}/${yuan}${sys}${ver2}
-if [ -f "${yuan}${sys}${ver2}" ];then
-echo -e "下载完成"
-cp ${fl2} ${fl2}${bc}
+mv ${fl2} ${fl2}${bc}
 echo -e "已备份"
-rm -rf ${fl2}
-mv ${yuan}${sys}${ver2} ${fl2}
+wget -O ${fl2} http://${dl}/${yuan}${sys}${ver2}
+if [ -f "${fl2}" ];then
+echo -e "下载完成"
 ${update}
 clear
 echo -e "更换完成"
