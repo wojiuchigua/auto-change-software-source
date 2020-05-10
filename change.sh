@@ -554,7 +554,7 @@ sudo zypper mr -da
 sduo zypper rr rpos
 sudo zypper rr rpnos
 sudo zypper rr uposs
-duo zypper rr upnos
+sduo zypper rr upnos
 sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/distribution${ve}${vers}/repo/oss/ rpos
 sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/distribution${ve}${vers}/repo/non-oss/ rpnos
 sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/update${ve}${vers}/oss/ uposs
