@@ -352,7 +352,7 @@ ofinit(){
 if [ "${ID}" = "ubuntu" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitalpine
@@ -362,7 +362,7 @@ ofinitalpine(){
 if [ "${ID}" = "alpine" ];then
 cp /etc/apk/repositories /etc/apk/repositories.bak.bak
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitdeepin
@@ -372,7 +372,7 @@ ofinitdeepin(){
 if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitdebian
@@ -383,7 +383,7 @@ if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 sudo apt install apt-transport-https ca-certificates
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitarchlinux
@@ -393,7 +393,7 @@ ofinitarchlinux(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitopensuse
@@ -403,7 +403,7 @@ ofinitopensuse(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak.bak
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 ofinitkali
@@ -414,7 +414,7 @@ if [ "${ID}" = "kali" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 allselect
 else
 echo -e "没有离线版本了哦请选择在线模式，或者真没有"
@@ -477,7 +477,7 @@ sed -i 's/security.ubuntu.com/ubuntu/'"${yt}"'/g' /etc/apt/sources.list
 sudo apt-get update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 ofalpine
 fi
@@ -489,7 +489,7 @@ sed -i 's/dl-cdn.alpinelinux.org/'"${yt}"'/g' /etc/apk/repositories
 sudo apk update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 ofdeepin
 fi
@@ -501,7 +501,7 @@ echo "deb [by-hash=force] ${h}${yt}}/deepin lion main contrib non-free" > /etc/a
 sudo apt-get update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 ofdebian
 fi
@@ -516,7 +516,7 @@ echo
 sudo apt-get update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 ofarchlinux
 fi
@@ -528,7 +528,7 @@ sed -i '1 i\Server = '"${h}"'://'"${yt}"'/archlinux/$repo/os/$arch' ${fl}
 sudo pacman -Syy
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 ofopensuse
 fi
@@ -562,7 +562,7 @@ sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/update${ve}${vers}/non-oss/ upn
 zypper update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 }
 ofkali(){
 if [ "${ID}" = "kali" ];then
@@ -571,7 +571,7 @@ echo "deb ${h}${yt}/kali kali-rolling main non-free contrib\ndeb-src ${h}${yt}/k
 sudo apt-get update
 clear
 echo -e "完成"
-slee 1s
+sleep 1s
 else
 echo -e "没有了呢请看看在线版本,要么真没有"
 fi
