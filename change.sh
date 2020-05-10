@@ -152,7 +152,7 @@ ofinit
 clear
 echo -e "${Error} ${none}"
 sleep 1s
-allelect
+allselect
 ;;
 esac
 }
@@ -463,7 +463,7 @@ exit 1
 clear
 echo -e "${Error} ${none}"
 sleep 1s
-ofline
+offline
 ;;
 esac
 }
