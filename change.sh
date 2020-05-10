@@ -547,6 +547,7 @@ ve="/leap"
 runopensuse
 else
 runopensuse
+fi
 }
 runopensuse(){
 sudo zypper mr -da
