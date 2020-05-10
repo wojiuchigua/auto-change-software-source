@@ -422,7 +422,7 @@ fi
 }
 
 
-ofline(){
+offline(){
 clear
 echo -e "${tongyong}"
 ${gen} yes
