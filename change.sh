@@ -125,11 +125,11 @@ clear
 echo && echo -e "换源脚本菜单 ${Red_font_prefix}[v${sh_ver}]}${Font_color_suffix}
          -- 换源脚本 | www.lxw2004.xyz --
 ${Green_font_prefix}0.${Font_color_suffix}升级脚本
---------------------选择系统源----------------------------
+--------------------选择版本----------------------------
 ${Green_font_prefix}1.${Font_color_suffix} 在线
 ${Green_font_prefix}2.${Font_color_suffix} 离线
 ${Green_font_prefix}3.${Font_color_suffix} 退出
-${Green_font_prefix}4.${Font_color_suffix} 离线版本初始化
+${Green_font_prefix}4.${Font_color_suffix} 离线版本初始化第一次使用
 ---------------------------------------------------------" && echo -e "系统:${ID}版本:${VERSION_ID}"
 ${gen} main
 case "$main" in
@@ -220,43 +220,17 @@ fi
 #centos
 oncentos(){
 if [ "${ID}" = "centos" ];then
+echo -e "仅支持6以上的版本"
 update="sudo yum makecache && yum update"
-oncentos7
+sys=${ID}
+ver="${VERSION_ID}.repo"
+bc=".bakup"
+fl="/etc/yum.repos.d/CentOS-Base.repo"
+run
 else
 ondebian
 fi
 }
-oncentos7(){
-if [ "${VERSION_ID}" = "7" ];then
-sys=${ID}
-ver="${VERSION_ID}.repo"
-bc=".bakup"
-fl="/etc/yum.repos.d/CentOS-Base.repo"
-else
-oncentos6
-fi
-}
-oncentos6(){
-if [ "${VERSION_ID}" = "6" ];then
-sys=${ID}
-ver="${VERSION_ID}.repo"
-bc=".bakup"
-fl="/etc/yum.repos.d/CentOS-Base.repo"
-else
-oncentos8
-fi
-}
-oncentos8(){
-if [ "${VERSION_ID}" = "8" ];then
-sys=${ID}
-ver="${VERSION_ID}.repo"
-bc=".bakup"
-fl="/etc/yum.repos.d/CentOS-Base.repo"
-else
-clear
-echo -e "CentOS低版本暂时懒得写"
-fi
-  }
   #debian
 ondebian(){
 if [ "${ID}" = "debian" ];then
@@ -377,7 +351,9 @@ fi
 ofinit(){
 if [ "${ID}" = "ubuntu" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
-allelect
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitalpine
 fi
@@ -385,7 +361,9 @@ fi
 ofinitalpine(){
 if [ "${ID}" = "alpine" ];then
 cp /etc/apk/repositories /etc/apk/repositories.bak.bak
-allelect
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitdeepin
 fi
@@ -393,7 +371,9 @@ fi
 ofinitdeepin(){
 if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
-allelect
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitdebian
 fi
@@ -401,7 +381,10 @@ fi
 ofinitdebian(){
 if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
-allelect
+sudo apt install apt-transport-https ca-certificates
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitarchlinux
 fi
@@ -409,7 +392,9 @@ fi
 ofinitarchlinux(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
-allelect
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitopensuse
 fi
@@ -417,7 +402,9 @@ fi
 ofinitopensuse(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak.bak
-allelect
+echo -e "完成"
+slee 1s
+allselect
 else
 ofinitkali
 fi
@@ -425,30 +412,166 @@ fi
 ofinitkali(){
 if [ "${ID}" = "kali" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
-allelect
+clear
+echo -e "完成"
+slee 1s
+allselect
 else
 echo -e "没有离线版本了哦请选择在线模式，或者真没有"
-}
-
-offline(){
-  cp
-  if [ "${ID}" = "ubuntu" ];then
-  sed -i 's/dl-cdn.alpinelinux.org/'"${yt}"'/g' ${fl}
-  else
-  centostest
-  fi
+fi
 }
 
 
+ofline(){
+clear
+echo -e "${tongyong}"
+${gen} yes
+case "$yes" in
+1)
+yuan="ali"
+oso="-f"
+yt="mirrors.aliyun.com"
+h="http"
+ofautomation
+;;
+2)
+yuan="tx"
+oso="-f"
+yt="mirrors.cloud.tencent.com"
+h="https"
+ofautomation
+;;
+3)
+yuan="qh"
+oso="-f"
+yt="mirrors.tuna.tsinghua.edu.cn"
+h="https"
+ofautomation
+;;
+4)
+yuan="wy"
+oso="-f"
+yt="mirrors.163.com"
+h="http"
+ofautomation
+;;
+5)
+clear
+exit 1
+;;
+*)
+clear
+echo -e "${Error} ${none}"
+sleep 1s
+ofline
+;;
+esac
+}
 
-
-
-
-
-
-
-
-
-
-
+ofautomation(){
+cp
+if [ "${ID}" = "ubuntu" ];then
+cp /etc/apt/sources.list.bak.bak /etc/apt/sources.list
+sed -i 's/archive.ubuntu.com/'"${yt}"'/g' /etc/apt/sources.list
+sed -i 's/security.ubuntu.com/ubuntu/'"${yt}"'/g' /etc/apt/sources.list
+sudo apt-get update
+clear
+echo -e "完成"
+slee 1s
+else
+ofalpine
+fi
+}
+ofalpine(){
+if [ "${ID}" = "alpine" ];then
+cp /etc/apt/sources.list.bak.bak /etc/apt/sources.list
+sed -i 's/dl-cdn.alpinelinux.org/'"${yt}"'/g' /etc/apk/repositories
+sudo apk update
+clear
+echo -e "完成"
+slee 1s
+else
+ofdeepin
+fi
+}
+ofdeepin(){
+if [ "${ID}" = "deepin" ];then
+cp /etc/apt/sources.list.bak.bak /etc/apt/sources.list
+echo "deb [by-hash=force] ${h}${yt}}/deepin lion main contrib non-free" > /etc/apt/sources.list
+sudo apt-get update
+clear
+echo -e "完成"
+slee 1s
+else
+ofdebian
+fi
+}
+ofdebian(){
+if [ "${ID}" = "debian" ];then
+cp /etc/apt/sources.list.bak.bak /etc/apt/sources.list
+sed -i 's/deb.debian.org/'"${yt}"'/g' /etc/apk/repositories
+sed -i 's/ftp.debian.org/'"${yt}"'/g' /etc/apk/repositories
+sudo apt install apt-transport-https ca-certificates
+echo
+sudo apt-get update
+clear
+echo -e "完成"
+slee 1s
+else
+ofarchlinux
+fi
+}
+ofarchlinux(){
+if [ "${ID}" = "kali" ];then
+cp /etc/pacman.d/mirrorlist.bak.bak /etc/pacman.d/mirrorlist
+sed -i '1 i\Server = '"${h}"'://'"${yt}"'/archlinux/$repo/os/$arch' ${fl}
+sudo pacman -Syy
+clear
+echo -e "完成"
+slee 1s
+else
+ofopensuse
+fi
+}
+ofopensuse(){
+if [ "${ID}" = "opensuse" ];then
+leaptest
+else
+ofkali
+fi
+}
+leaptest(){
+if ( cat ${VERSION_ID}|grep "45 15" );then
+vers="${VERSION_ID}"
+ve="/leap"
+runopensuse
+else
+runopensuse
+}
+runopensuse(){
+sudo zypper mr -da
+sduo zypper rr rpos
+sudo zypper rr rpnos
+sudo zypper rr uposs
+duo zypper rr upnos
+sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/distribution${ve}${vers}/repo/oss/ rpos
+sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/distribution${ve}${vers}/repo/non-oss/ rpnos
+sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/update${ve}${vers}/oss/ uposs
+sudo zypper addrepo ${oso} ${h}://${yt}/opensuse/update${ve}${vers}/non-oss/ upnos
+zypper update
+clear
+echo -e "完成"
+slee 1s
+}
+ofkali(){
+if [ "${ID}" = "kali" ];then
+cp /etc/apt/sources.list.bak.bak /etc/apt/sources.list
+echo "deb ${h}${yt}/kali kali-rolling main non-free contrib\ndeb-src ${h}${yt}/kali kali-rolling main non-free contrib" > /etc/apt/sources.list
+sudo apt-get update
+clear
+echo -e "完成"
+slee 1s
+else
+echo -e "没有了呢请看看在线版本,要么真没有"
+}
 allselect
