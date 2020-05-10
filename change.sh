@@ -266,7 +266,7 @@ sys="${ID}"
 ver="1.list"
 bc=".bak"
 fl="/etc/apt/sources.list"
-update="apt-get update"
+update="sudo apt-get update"
 run
 else
 clear
