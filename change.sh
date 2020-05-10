@@ -379,48 +379,65 @@ if [ "${ID}" = "ubuntu" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
 allelect
 else
-ofalpine
+ofinitalpine
 fi
 }
-ofalpine(){
+ofinitalpine(){
 if [ "${ID}" = "alpine" ];then
 cp /etc/apk/repositories /etc/apk/repositories.bak.bak
+allelect
 else
-ofdeepin
+ofinitdeepin
 fi
 }
-ofdeepin(){
+ofinitdeepin(){
 if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+allelect
 else
-ofdebian
+ofinitdebian
 fi
 }
-ofdebian(){
+ofinitdebian(){
 if [ "${ID}" = "deepin" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+allelect
 else
-ofarchlinux
+ofinitarchlinux
 fi
 }
-ofarchlinux(){
+ofinitarchlinux(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+allelect
 else
-ofopensuse
+ofinitopensuse
 fi
 }
-ofopensuse(){
+ofinitopensuse(){
 if [ "${ID}" = "archlinux" ];then
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak.bak
+allelect
 else
-ofkali
+ofinitkali
 fi
 }
-ofkali(){
+ofinitkali(){
+if [ "${ID}" = "kali" ];then
 cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+allelect
+else
+echo -e "没有离线版本了哦请选择在线模式，或者真没有"
 }
 
+offline(){
+  cp
+  if [ "${ID}" = "ubuntu" ];then
+  sed -i 's/dl-cdn.alpinelinux.org/'"${yt}"'/g' ${fl}
+  else
+  centostest
+  fi
+}
 
 
 
