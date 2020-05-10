@@ -574,5 +574,6 @@ echo -e "完成"
 slee 1s
 else
 echo -e "没有了呢请看看在线版本,要么真没有"
+fi
 }
 allselect
