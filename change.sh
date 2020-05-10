@@ -119,243 +119,6 @@ Update_shell(){
 
 }
 
-
-#以下结为自动化
-#ubuntu
-onautomation(){
-if [ "${ID}" = "ubuntu" ];then
-yuan="ali"
-sys="${ID}"
-ver="${VERSION_ID}.list"
-bc=".bak"
-fl="/etc/apt/sources.list"
-update="apt-get update"
-run
-else
-centostest
-fi
-}
-#centos
-centostest(){
-if [ "${ID}" = "centos" ];then
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-if [ "${VERSION_ID}" = "7" ];then
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-sudo yum makecache && yum update
-clear
-echo -e "更换完成"
-sleep 5s
-else
-centos61
-fi
-else
-debiantest
-fi
-}
-
-centos61(){
-if [ "${VERSION_ID}" = "6" ];then
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-sudo yum makecache && yum update
-clear
-echo -e "更换完成"
-sleep 5s
-e
-else
-centos81
-fi
-
-}
-centos81(){
-if [ "${VERSION_ID}" = "8" ];then
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
-sudo yum makecache && yum update
-clear
-echo -e "更换完成"
-sleep 5s
-e
-else
-低版本暂时懒得写
-fi
-}
-#debian
-debiantest(){
-if [ "${ID}" = "debian" ];then
-yuan="ali"
-sys="${ID}"
-ver="${VERSION_ID}.list"
-bc=".bak"
-fl="/etc/apt/sources.list"
-update="apt-get update"
-run
-else
-fedoratest
-fi
-}
-#fedora
-fedoratest(){
-if [ "${ID}" = "fedora" ];then
-mv /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora.repo.backup
-mv /etc/yum.repos.d/fedora-updates.repo /etc/yum.repos.d/fedora-updates.repo.backup
-wget -O /etc/yum.repos.d/fedora.repo http://mirrors.aliyun.com/repo/fedora.repo
-wget -O /etc/yum.repos.d/fedora-updates.repo http://mirrors.aliyun.com/repo/fedora-updates.repo
-sudo yum makecache && yum update
-else
-kalitest
-fi
-}
-
-kalitest(){
-if [ "${ID}" = "kali" ];then
-yuan="ali"
-sys="${ID}"
-ver="1.list"
-bc=".bak"
-fl="/etc/apt/sources.list"
-update="apt-get update"
-run
-else
-archtest
-fi
-}
-archtest(){
-if [ "${ID}" = "arch" ];then
-yt="mirrors.aliyun.com"
-bc=".backup"
-fl="/etc/pacman.d/mirrorlist"
-update="pacman -Syy"
-h="http"
-you1
-else
-deepintest
-fi
-}
-deepintest(){
-if [ "${ID}" = "deepin" ];then
-yt="mirrors.aliyun.com"
-h="http"
-bc=".bak"
-fl="/etc/apt/sources.list"
-update="apt-get update"
-depin
-else
-alpinetest
-fi
-}
-alpinetest(){
-if [ "${ID}" = "alpine" ];then
-fl="/etc/apk/repositories"
-update="apk update"
-yt="mirrors.aliyun.com"
-alpines
-else
-opensusetest
-fi
-}
-opensuse(){
-if [ "${ID}" = "opensuse-leap" ];then
-oso="-f"
-h="http"
-yt="mirrors.aliyun.com"
-vers="${VERSION_ID}"
-update="zypper update"
-opensuseuse
-else
-opensusea1
-fi
-}
-opensusea1(){
-if [ "${ID}" = "opensuse" ];then
-oso="-f"
-h="http"
-yt="mirrors.aliyun.com"
-vers="${VERSION_ID}"
-update="zypper update"
-osu
-else
-menu
-fi
-}
-opensuseuse(){
-if [ "${vers}" == "15.1" ];then
-ve="/leap/"
-osu
-else
-nicea2
-fi
-}
-nicea2(){
-if [ "${vers}" == "15.2" ];then
-ve="/leap/"
-osu
-else
-nicea3
-fi
-}
-nicea3(){
-if [ "${vers}" == "15.3" ];then
-ve="/leap/"
-osu
-else
-nicea4
-fi
-}
-nicea4(){
-if [ "${vers}" == "15.4" ];then
-ve="/leap/"
-osu
-else
-nicea5
-fi
-}
-nicea5(){
-if [ "${vers}" == "15.5" ];then
-ve="/leap/"
-osu
-else
-niceae1
-fi
-}
-niceae1(){
-if [ "${jieguo}" == "42.1" ];then
-ve="/leap/"
-osu
-else
-niceae2
-fi
-}
-niceae2(){
-if [ "${vers}" == "42.2" ];then
-ve="/leap/"
-osu
-else
-niceae3
-fi
-}
-niceae3(){
-if [ "${vers}" == "42.3" ];then
-ve="/leap/"
-osu
-else
-niceae4
-fi
-}
-niceae4(){
-if [ "${vers}" == "42.4" ];then
-ve="/leap/"
-osu
-else
-niceae5
-fi
-}
-niceae5(){
-if [ "${vers}" == "42.5" ];then
-ve="/leap/"
-osu
-else
-osu
-fi
-}
 #选择离线在线与自动
 allselect(){
 clear
@@ -366,6 +129,7 @@ ${Green_font_prefix}0.${Font_color_suffix}升级脚本
 ${Green_font_prefix}1.${Font_color_suffix} 在线
 ${Green_font_prefix}2.${Font_color_suffix} 离线
 ${Green_font_prefix}3.${Font_color_suffix} 退出
+${Green_font_prefix}4.${Font_color_suffix} 离线版本初始化
 ---------------------------------------------------------" && echo -e "系统:${ID}版本:${VERSION_ID}"
 ${gen} main
 case "$main" in
@@ -380,6 +144,9 @@ offline
 ;;
 3)
 exit 1
+;;
+4)
+ofinit
 ;;
 *)
 clear
@@ -556,6 +323,7 @@ if ( cat ${yuan}${sys}${ver}|grep "404" );then
 clear
 echo -e "下载失败请检查网络链接"
 rm -rf ${yuan}${sys}${ver}
+mv ${fl}${bc} ${fl}
 else
 echo -e "下载完成"
 mv ${fl} ${fl}${bc}
@@ -592,6 +360,7 @@ if ( cat ${yuan}${sys}${ver2}|grep "404" );then
 clear
 echo -e "下载失败请检查网络链接"
 rm -rf ${yuan}${sys}${ver2}
+mv ${fl2}${bc} ${fl2}
 else
 echo -e "下载完成"
 cp ${fl2} ${fl2}${bc}
@@ -604,4 +373,65 @@ echo -e "更换完成"
 sleep 3s
 fi
 }
+
+ofinit(){
+if [ "${ID}" = "ubuntu" ];then
+cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+allelect
+else
+ofalpine
+fi
+}
+ofalpine(){
+if [ "${ID}" = "alpine" ];then
+cp /etc/apk/repositories /etc/apk/repositories.bak.bak
+else
+ofdeepin
+fi
+}
+ofdeepin(){
+if [ "${ID}" = "deepin" ];then
+cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+else
+ofdebian
+fi
+}
+ofdebian(){
+if [ "${ID}" = "deepin" ];then
+cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+else
+ofarchlinux
+fi
+}
+ofarchlinux(){
+if [ "${ID}" = "archlinux" ];then
+cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+else
+ofopensuse
+fi
+}
+ofopensuse(){
+if [ "${ID}" = "archlinux" ];then
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak.bak
+else
+ofkali
+fi
+}
+ofkali(){
+cp /etc/apt/sources.list /etc/apt/sources.list.bak.bak
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 allselect
