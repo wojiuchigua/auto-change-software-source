@@ -6,14 +6,14 @@ export PATH
 #       Description: replace software source script
 #       Version: 1.0
 #       Author: wojiuchigua
-#       Website: www.lxw2004.xyz
+#       Website: blog.cloudyun.xyz
 #=========================================================
 #引用
 source /etc/os-release
 #变量
 sh_ver="2.0"
 
-dl="dl.lxw2004.xyz/linux"
+dl="d.cloudyun.xyz/software-source/"
 error="错误"
 kanxi="但是我拒绝s"
 Error="错误"
